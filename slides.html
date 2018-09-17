@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .window {
+            margin: 20px auto;
+            width: 400px;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: all 1s;
+        }
+        .slides> img {
+            width: 400px;
+        }
+        .buttons{
+            text-align: center;
+        }
+        .buttons> button {
+            margin: 0 10px;
+            padding: 5px 10px;
+            background: #00cccc;
+            border: 1px solid aqua;
+            border-radius: 3px;
+        }
+        .buttons> button:hover{
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            transformValue: '',
+            buttons: [1,2,3,4,5]
+        },
+        template:`
+        <div>
+            <div class="window">
+                <div class="slides" v-bind:style="{transform: transformValue}">
+                    <img src="http://p8rplhkt6.bkt.clouddn.com/18-9-17/38132336.jpg" alt="1">
+                    <img src="http://p8rplhkt6.bkt.clouddn.com/18-9-17/65328113.jpg" alt="2">
+                    <img src="http://p8rplhkt6.bkt.clouddn.com/18-9-17/32522150.jpg" alt="3">
+                    <img src="http://p8rplhkt6.bkt.clouddn.com/18-9-17/21672105.jpg" alt="4">
+                    <img src="http://p8rplhkt6.bkt.clouddn.com/18-9-17/29264187.jpg" alt="5">
+                </div>
+            </div>
+            <div class="buttons">
+                <button v-for="btn in buttons" v-on:click="go(btn-1)">{{btn}}</button>
+            </div>
+        </div>
+        `,
+        methods:{
+            go(index){
+                console.log(index)
+                this.transformValue = `translateX(${-400*index}px)`
+                console.log(this.transformValue)
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        ol,ul{
+            list-style: none;
+        }
+        .menu{
+            margin-top: 50px;
+        }
+        .menu> ol{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .menu> ol> li{
+            border: 1px solid #00cccc;
+            border-bottom: none;
+            padding: 15px 50px;
+            background-color: #00cccc;
+        }
+        .menu> ol> li.active{
+            background: aqua;
+        }
+        .submenu> ol> li{
+            border: 1px solid #00cccc;
+            border-top-color: aqua;
+            width: 353px;
+            margin: 0 auto;
+            padding: 100px;
+            text-align: center;
+            font-size: 30px;
+            background: aqua;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            tabs:[
+                {name:'t1',content:'tab1'},
+                {name:'t2',content:'tab2'},
+                {name:'t3',content:'tab3'}
+            ],
+            selected: 't1',
+        },
+        template:`
+        <div>
+             <div class="menu">
+                 <ol>
+                    <li v-for="tab in tabs"
+                        v-on:click="selected = tab.name"
+                        v-bind:class="{active: selected === tab.name}">
+                            {{tab.name}}
+                    </li>
+                 </ol>
+             </div>
+             <div class="submenu">
+                 <ol>
+                    <li v-for="tab in tabs" v-if="selected === tab.name">{{tab.content}}</li>
+                 </ol>
+             </div>
+        </div>
+        `,
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>
